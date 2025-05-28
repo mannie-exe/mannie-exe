@@ -80,9 +80,6 @@ sudo ufw allow ssh                # SSH administration (port 22)
 sudo ufw allow 80/tcp             # HTTP (Traefik redirect)
 sudo ufw allow 443/tcp            # HTTPS (Traefik SSL termination)
 
-# Cloudflare tunnel support (outbound only)
-sudo ufw allow out 7844/tcp       # cloudflared connections
-
 # Enable firewall
 sudo ufw enable
 
@@ -100,6 +97,8 @@ sudo ufw status verbose
 
 SSH is the primary administrative access point and requires comprehensive hardening ^[5].
 
+> **Note**: The configuration below balances security with practical workflow requirements. While keeping root login and standard port 22 is less secure than industry best practices, it reflects the realities of single-user VPS management without the overhead of user account administration or client-side SSH configuration tracking.
+
 **Authentication Security**:
 
 ```bash
@@ -107,7 +106,7 @@ SSH is the primary administrative access point and requires comprehensive harden
 ssh-keygen -t ed25519 -C "admin@yourdomain.com"
 
 # Copy public key to server
-ssh-copy-id -i ~/.ssh/id_ed25519.pub user@yourserver.com
+ssh-copy-id -i ~/.ssh/id_ed25519.pub root@yourserver.com
 ```
 
 **SSH Daemon Configuration** (`/etc/ssh/sshd_config`):
@@ -116,13 +115,13 @@ ssh-copy-id -i ~/.ssh/id_ed25519.pub user@yourserver.com
 # Authentication hardening
 PasswordAuthentication no         # Disable password auth
 PubkeyAuthentication yes         # Enable key-based auth only
-PermitRootLogin no              # Block root login
+PermitRootLogin yes             # Keep root login (practical for single-user VPS)
 MaxAuthTries 3                  # Limit auth attempts
 MaxStartups 2                   # Limit concurrent connections
 
 # Protocol hardening
 Protocol 2                      # Use SSH protocol 2 only
-Port 2222                      # Change default port (optional)
+Port 22                        # Keep standard port (avoid client config overhead)
 AddressFamily inet              # IPv4 only (unless IPv6 needed)
 
 # Session management
@@ -146,7 +145,7 @@ sudo sshd -t
 sudo systemctl reload sshd
 
 # Test new connection before closing current session
-ssh -p 2222 user@yourserver.com
+ssh root@yourserver.com
 ```
 
 ### System Hardening
