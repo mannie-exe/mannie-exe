@@ -23,6 +23,11 @@ Working on [Atlas](https://github.com/inherent-design/atlas) - A framework for k
 - OpenGL/graphics programming
 - Thread-safe, cross-platform system architecture
 
+## 📚 Guides
+
+### Modern Routing Infrastructure
+- **[Modern Routing with Coolify & Cloudflare](guides/00-modern-routing.md)** - Complete setup guide for self-hosted applications with SSL termination, reverse proxy configuration, and hybrid routing architectures
+
 ## 💡 Philosophy
 
 > "Reality is fluid. Perspective is everything." - Fabric Engine
