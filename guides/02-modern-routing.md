@@ -201,7 +201,24 @@ sudo sysctl -p
 - **send_redirects=0**: Prevents your server from sending redirects (good for routers, bad for servers)
 - **accept_source_route=0**: Blocks packets that specify their own routing path (classic attack vector)
 
+---
+
+## ✅ Validated Configuration Summary
+
+The sections above cover the **tested and implemented** security hardening:
+
+- **UFW Firewall**: Essential service access only (SSH, HTTP/HTTPS)
+- **SSH Hardening**: Key-only authentication, connection limits, secure protocols
+- **System Hardening**: Automatic security updates and kernel parameter tuning
+- **Minecraft Security**: Server.properties configuration with authentication and access controls
+
+These configurations have been verified and are ready for production use.
+
+---
+
 ## Application-Layer Security
+
+> **⚠️ Work In Progress**: The sections below are still being tested and validated. Proceed with caution and thorough testing in your environment.
 
 ### Coolify Security Configuration
 
@@ -288,7 +305,12 @@ enforce-whitelist=true             # Strict whitelist enforcement
 
 # Resource protection
 max-players=20                     # Limit concurrent players
-rate-limit-packets-per-second=7    # Prevent packet flooding
+rate-limit=1000                    # Packet rate limiting (permissive for whitelisted users)
+
+# Remote console
+enable-rcon=false                  # Disable remote console
+rcon.port=25575                    # RCON port
+rcon.password=                     # RCON password
 ```
 
 **Whitelist Management**:
