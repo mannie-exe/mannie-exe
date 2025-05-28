@@ -23,7 +23,7 @@ The security architecture follows the principle of defense-in-depth, where multi
 - Network segmentation via Docker networks
 - Reverse proxy SSL/TLS termination
 
-**Application Layer**: 
+**Application Layer**:
 - Authentication and authorization
 - Input validation and sanitization
 - Secure configuration management
@@ -68,6 +68,9 @@ Ubuntu's Uncomplicated Firewall (UFW) provides a simplified interface to iptable
 **Principle: Default Deny with Explicit Allow**
 
 ```bash
+# Check current UFW status and rules
+sudo ufw status verbose
+
 # Reset UFW to known state
 sudo ufw --force reset
 
@@ -97,16 +100,16 @@ sudo ufw status verbose
 
 SSH is the primary administrative access point and requires comprehensive hardening ^[5].
 
-> **Note**: The configuration below balances security with practical workflow requirements. While keeping root login and standard port 22 is less secure than industry best practices, it reflects the realities of single-user VPS management without the overhead of user account administration or client-side SSH configuration tracking.
+> **Note**: The configuration below balances security with practical workflow requirements. While keeping root login and standard port 22 is less secure than industry best practices, this approach reduces operational complexity for small-scale deployments.
 
 **Authentication Security**:
 
 ```bash
 # Generate strong SSH key pair
-ssh-keygen -t ed25519 -C "admin@yourdomain.com"
+ssh-keygen -t ed25519 -C "admin@example.com"
 
 # Copy public key to server
-ssh-copy-id -i ~/.ssh/id_ed25519.pub root@yourserver.com
+ssh-copy-id -i ~/.ssh/id_ed25519.pub root@server.example.com
 ```
 
 **SSH Daemon Configuration** (`/etc/ssh/sshd_config`):
@@ -115,7 +118,7 @@ ssh-copy-id -i ~/.ssh/id_ed25519.pub root@yourserver.com
 # Authentication hardening
 PasswordAuthentication no         # Disable password auth
 PubkeyAuthentication yes         # Enable key-based auth only
-PermitRootLogin yes             # Keep root login (practical for single-user VPS)
+PermitRootLogin yes             # Keep root login (reduces complexity for small deployments)
 MaxAuthTries 3                  # Limit auth attempts
 MaxStartups 2                   # Limit concurrent connections
 
@@ -145,31 +148,58 @@ sudo sshd -t
 sudo systemctl reload sshd
 
 # Test new connection before closing current session
-ssh root@yourserver.com
+ssh root@server.example.com
 ```
 
 ### System Hardening
 
 **Automatic Security Updates**:
+
 ```bash
-# Enable unattended upgrades for security patches
+# Check if unattended-upgrades is installed and configured
+dpkg -l | grep unattended-upgrades
+cat /etc/apt/apt.conf.d/20auto-upgrades 2>/dev/null || echo "Not configured"
+
+# Install and configure if needed
 sudo apt install unattended-upgrades
 sudo dpkg-reconfigure -plow unattended-upgrades
 ```
 
-**Kernel Security Parameters** (`/etc/sysctl.conf`):
-```bash
-# Network security
-net.ipv4.conf.default.rp_filter=1
-net.ipv4.conf.all.rp_filter=1
-net.ipv4.tcp_syncookies=1
-net.ipv4.conf.all.accept_redirects=0
-net.ipv4.conf.all.send_redirects=0
-net.ipv4.conf.all.accept_source_route=0
+**Understanding the Configuration**:
+- `dpkg-reconfigure -plow` shows an interactive dialog asking if you want automatic updates enabled
+- `-plow` means "priority low" - shows all configuration questions including optional ones
+- Creates `/etc/apt/apt.conf.d/20auto-upgrades` with periodic update settings
+- If already configured, you'll see the file contents instead of "Not configured"
 
-# Apply changes
+**Kernel Security Parameters** (`/etc/sysctl.conf`):
+
+```bash
+# Check current values first
+sysctl net.ipv4.conf.default.rp_filter
+sysctl net.ipv4.tcp_syncookies
+sysctl net.ipv4.conf.all.accept_redirects
+
+# Network security hardening
+net.ipv4.conf.default.rp_filter=1          # Reverse path filtering (anti-spoofing)
+net.ipv4.conf.all.rp_filter=1              # Apply to all interfaces
+net.ipv4.tcp_syncookies=1                  # SYN flood protection
+net.ipv4.conf.all.accept_redirects=0       # Ignore ICMP redirects (routing attacks)
+net.ipv4.conf.all.send_redirects=0         # Don't send ICMP redirects
+net.ipv4.conf.all.accept_source_route=0    # Ignore source routing (spoofing attacks)
+
+# Apply changes immediately
 sudo sysctl -p
 ```
+
+**What These Parameters Do**:
+- **rp_filter**: Reverse Path Filtering (anti-spoofing protection)
+  - `0` = Disabled (no filtering)
+  - `1` = Strict mode (packet must return via same interface)
+  - `2` = Loose mode (packet can return via any interface with valid route)
+- **tcp_syncookies**: Protects against SYN flood attacks by encoding connection state in cookies
+- **accept_redirects=0**: Ignores ICMP redirect messages that could reroute your traffic maliciously
+- **send_redirects=0**: Prevents your server from sending redirects (good for routers, bad for servers)
+- **accept_source_route=0**: Blocks packets that specify their own routing path (classic attack vector)
 
 ## Application-Layer Security
 
@@ -241,6 +271,8 @@ docker network inspect app-tier
 ```
 
 ### Minecraft-Specific Security
+
+Minecraft server security requires specialized configuration through the `server.properties` file, which defines critical security parameters for multiplayer servers ^[11,12,13].
 
 **Server Configuration** (`server.properties`):
 ```properties
@@ -335,13 +367,13 @@ middlewares:
 **TLS Testing and Validation**:
 ```bash
 # Test TLS configuration
-curl -I https://yourservice.yourdomain.com
+curl -I https://service.example.com
 
 # SSL Labs testing (aim for A+ rating)
 # https://www.ssllabs.com/ssltest/
 
 # OpenSSL verification
-openssl s_client -connect yourservice.yourdomain.com:443 -servername yourservice.yourdomain.com
+openssl s_client -connect service.example.com:443 -servername service.example.com
 ```
 
 ## Monitoring and Intrusion Detection
@@ -363,7 +395,7 @@ sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
 ```ini
 [sshd]
 enabled = true
-port = 2222              # Match your SSH port
+port = 22                # Match your SSH port
 logpath = /var/log/auth.log
 maxretry = 3             # Failed attempts before ban
 bantime = 3600           # Ban duration (1 hour)
@@ -400,7 +432,7 @@ sudo tail -f /var/log/auth.log | grep sshd
 # Docker container logs
 docker logs -f container_name
 
-# Traefik access and error logs  
+# Traefik access and error logs
 docker logs -f traefik-container
 
 # System security events
@@ -412,7 +444,7 @@ sudo journalctl -f -u docker
 ```bash
 # Create daily security summary script
 #!/bin/bash
-# /home/user/scripts/security-summary.sh
+# /home/admin/scripts/security-summary.sh
 
 echo "=== Daily Security Summary $(date) ==="
 
@@ -600,6 +632,12 @@ docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
 [9] fail2ban Development Team. "fail2ban." *GitHub Repository*. May 28, 2025. https://github.com/fail2ban/fail2ban
 
 [10] Center for Internet Security. "CIS Benchmarks." *CIS Security*. May 28, 2025. https://www.cisecurity.org/cis-benchmarks
+
+[11] Minecraft Wiki Contributors. "server.properties." *Minecraft Wiki*. May 27, 2025. https://minecraft.wiki/w/Server.properties
+
+[12] PaperMC Documentation Team. "server.properties." *PaperMC Documentation*. May 28, 2025. https://docs.papermc.io/paper/reference/server-properties/
+
+[13] Minecraft Wiki Contributors. "server.properties." *Minecraft Fandom Wiki*. May 26, 2025. https://minecraft.fandom.com/wiki/Server.properties
 
 ---
 
