@@ -10,8 +10,8 @@ Working on [Atlas](https://github.com/inherent-design/atlas) - A framework for k
 
 ### Systems & Architecture
 - **[Fabric Engine](https://github.com/inherent-design/fabric)** - A perspective-based engine in C++20 exploring how information presentation changes with viewpoint
-- **[ReX](https://github.com/inherent-design/ReX)** - Compositional content architecture for isomorphic web applications
-- **[Atlas](https://github.com/inherent-design/atlas)** - Multi-agent AI orchestration with knowledge graph integration
+- **[ReX](https://github.com/inherent-design/ReX)** - Compositional content architecture for isomorphic web applications ([docs](https://rex.inherent.design))
+- **[Atlas](https://github.com/inherent-design/atlas)** - Multi-agent AI orchestration with knowledge graph integration ([docs](https://atlas.inherent.design))
 
 ### AI/ML Exploration
 - Started with Markov chains ([markie.py](https://github.com/mannie-exe/markie.py))
@@ -64,7 +64,7 @@ Some principles I try to follow:
 
 ### Recent Client Wins
 - **60% API cost reduction** - Built custom LLM orchestration system
-- **300% performance increase** - Optimized C++ rendering pipeline  
+- **300% performance increase** - Optimized C++ rendering pipeline
 - **10M+ operations/day** - Designed multi-agent AI system
 - **Days to minutes** - Automated deployment pipeline reducing release time
 
