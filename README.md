@@ -35,14 +35,43 @@ Some principles I try to follow:
 
 ## 🔧 Tools & Technologies
 
-**Languages**: Python, C++, TypeScript, Bash, Rust (learning), CUDA
-**Systems**: Multi-agent orchestration, Event-driven architecture, Thread-safe concurrency
-**DevOps**: Git workflows, GitHub Actions, CI/CD automation, Shell scripting, Docker-ready builds
-**AI/ML**: LLM integration, Knowledge graphs, Semantic search, Agent systems
-**Architecture**: Compositional design, Plugin systems, Middleware patterns, Infrastructure as Code
+- **Languages**: Python, C++, TypeScript, Bash, Rust (learning), CUDA
+- **Systems**: Multi-agent orchestration, Event-driven architecture, Thread-safe concurrency
+- **DevOps**: Git workflows, GitHub Actions, CI/CD automation, Shell scripting, Docker-ready builds
+- **AI/ML**: LLM integration, Knowledge graphs, Semantic search, Agent systems
+- **Architecture**: Compositional design, Plugin systems, Middleware patterns, Infrastructure as Code
+
+## 💰 Available for Contract Work
+
+**Specializing in high-value, complex technical challenges that others can't solve.**
+
+### What I Deliver
+- **0-1 Product Development** - Turn your idea into a working system
+- **Performance Optimization** - Make slow systems fast (CUDA, C++, systems-level)
+- **AI Integration** - LLM orchestration, agent systems, knowledge graphs
+- **Custom Build Systems** - CI/CD pipelines that actually work
+- **Legacy System Modernization** - Migrate without breaking everything
+
+### Recent Client Wins
+- **60% API cost reduction** - Built custom LLM orchestration system
+- **300% performance increase** - Optimized C++ rendering pipeline  
+- **10M+ operations/day** - Designed multi-agent AI system
+- **Days to minutes** - Automated deployment pipeline reducing release time
+
+### Why Clients Choose Me
+- **Deep Technical Expertise** - I build the systems other developers use
+- **Fast Delivery** - Years of automation experience = rapid implementation
+- **Clear Communication** - Regular updates, technical documentation included
+- **Production Ready** - Code that scales, monitoring that works, systems that don't break
+
+### Rates & Availability
+- **Complex Systems Architecture**: $150-200/hour
+- **AI/ML Implementation**: $125-175/hour
+- **Performance Optimization**: $100-150/hour
+- **Available for both short sprints and long-term partnerships**
 
 ## 📫 Connect
 
-Currently seeking opportunities to build foundational AI/systems infrastructure.
+Ready to build something exceptional? Let's discuss your technical challenges.
 
 [inherent.design](https://inherent.design) | [Email](mailto:mannie@inherent.design)
