@@ -1,6 +1,6 @@
 # Building Realities, One System at a Time
 
-Working on systems and exploring how information can be structured and understood.
+Systems architect and infrastructure engineer building foundational technologies that power next-generation applications.
 
 ## 🌌 Current Focus
 
@@ -30,14 +30,16 @@ Working on [Atlas](https://github.com/inherent-design/atlas) - A framework for k
 Some principles I try to follow:
 - **First principles thinking** - Understanding the why before the how
 - **Clean architecture** - Code that's maintainable and understandable
+- **Automation first** - Build systems that build themselves
 - **Continuous learning** - Always exploring new challenges
 
 ## 🔧 Tools & Technologies
 
-**Languages**: Python, C++, TypeScript, Rust (learning), CUDA
+**Languages**: Python, C++, TypeScript, Bash, Rust (learning), CUDA
 **Systems**: Multi-agent orchestration, Event-driven architecture, Thread-safe concurrency
+**DevOps**: Git workflows, GitHub Actions, CI/CD automation, Shell scripting, Docker-ready builds
 **AI/ML**: LLM integration, Knowledge graphs, Semantic search, Agent systems
-**Architecture**: Compositional design, Plugin systems, Middleware patterns
+**Architecture**: Compositional design, Plugin systems, Middleware patterns, Infrastructure as Code
 
 ## 📫 Connect
 
