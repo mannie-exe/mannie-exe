@@ -28,6 +28,11 @@ Working on [Atlas](https://github.com/inherent-design/atlas) - A framework for k
 ### Modern Routing Infrastructure
 - **[Modern Routing with Coolify & Cloudflare](guides/00-modern-routing.md)** - Complete setup guide for self-hosted applications with SSL termination, reverse proxy configuration, and hybrid routing architectures
 
+## 📋 References
+
+### Security & Compliance
+- **[NIST-Based Incident Response Procedures](reference/nist-incident-response-procedures.md)** - Comprehensive security incident response framework following NIST SP 800-61r2 guidelines for enterprise infrastructure
+
 ## 💡 Philosophy
 
 > "Reality is fluid. Perspective is everything." - Fabric Engine
