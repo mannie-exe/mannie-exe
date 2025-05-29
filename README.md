@@ -26,7 +26,7 @@ Working on [Atlas](https://github.com/inherent-design/atlas) - A framework for k
 ## 📚 Guides
 
 ### Modern Routing Infrastructure
-- **[Modern Routing with Coolify & Cloudflare](guides/00-modern-routing.md)** - Complete setup guide for self-hosted applications with SSL termination, reverse proxy configuration, and hybrid routing architectures
+- **[Modern Routing with Coolify & Cloudflare](guides/modern-routing/01-you-are-my-route-you-are-my-source.md)** - Complete setup guide for self-hosted applications with SSL termination, reverse proxy configuration, and hybrid routing architectures
 
 ## 📋 References
 
