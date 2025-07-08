@@ -13,11 +13,6 @@ Working on [Atlas](https://github.com/inherent-design/atlas) - A framework for k
 - **[ReX](https://github.com/inherent-design/ReX)** - Compositional content architecture for isomorphic web applications ([docs](https://rex.inherent.design))
 - **[Atlas](https://github.com/inherent-design/atlas)** - Multi-agent AI orchestration with knowledge graph integration ([docs](https://atlas.inherent.design))
 
-### AI/ML Exploration
-- Started with Markov chains ([markie.py](https://github.com/mannie-exe/markie.py))
-- Currently working on LLM orchestration systems
-- Exploring agent coordination, knowledge persistence, and semantic understanding
-
 ### Low-Level Performance
 - CUDA programming for GPU acceleration
 - OpenGL/graphics programming
@@ -61,12 +56,6 @@ Some principles I try to follow:
 - **AI Integration** - LLM orchestration, agent systems, knowledge graphs
 - **Custom Build Systems** - CI/CD pipelines that actually work
 - **Legacy System Modernization** - Migrate without breaking everything
-
-### Recent Client Wins
-- **60% API cost reduction** - Built custom LLM orchestration system
-- **300% performance increase** - Optimized C++ rendering pipeline
-- **10M+ operations/day** - Designed multi-agent AI system
-- **Days to minutes** - Automated deployment pipeline reducing release time
 
 ### Why Clients Choose Me
 - **Deep Technical Expertise** - I build the systems other developers use
